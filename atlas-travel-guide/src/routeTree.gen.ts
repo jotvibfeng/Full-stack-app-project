@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AtlasProfileRouteImport } from './routes/atlasProfile'
 import { Route as AtlasHomeRouteImport } from './routes/atlasHome'
 import { Route as AtlasContactRouteImport } from './routes/atlasContact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const AtlasProfileRoute = AtlasProfileRouteImport.update({
+  id: '/atlasProfile',
+  path: '/atlasProfile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AtlasHomeRoute = AtlasHomeRouteImport.update({
   id: '/atlasHome',
   path: '/atlasHome',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/atlasContact': typeof AtlasContactRoute
   '/atlasHome': typeof AtlasHomeRoute
+  '/atlasProfile': typeof AtlasProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/atlasContact': typeof AtlasContactRoute
   '/atlasHome': typeof AtlasHomeRoute
+  '/atlasProfile': typeof AtlasProfileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,20 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/atlasContact': typeof AtlasContactRoute
   '/atlasHome': typeof AtlasHomeRoute
+  '/atlasProfile': typeof AtlasProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/atlasContact' | '/atlasHome'
+  fullPaths: '/' | '/about' | '/atlasContact' | '/atlasHome' | '/atlasProfile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/atlasContact' | '/atlasHome'
-  id: '__root__' | '/' | '/about' | '/atlasContact' | '/atlasHome'
+  to: '/' | '/about' | '/atlasContact' | '/atlasHome' | '/atlasProfile'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/atlasContact'
+    | '/atlasHome'
+    | '/atlasProfile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +82,18 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AtlasContactRoute: typeof AtlasContactRoute
   AtlasHomeRoute: typeof AtlasHomeRoute
+  AtlasProfileRoute: typeof AtlasProfileRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/atlasProfile': {
+      id: '/atlasProfile'
+      path: '/atlasProfile'
+      fullPath: '/atlasProfile'
+      preLoaderRoute: typeof AtlasProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/atlasHome': {
       id: '/atlasHome'
       path: '/atlasHome'
@@ -107,6 +130,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AtlasContactRoute: AtlasContactRoute,
   AtlasHomeRoute: AtlasHomeRoute,
+  AtlasProfileRoute: AtlasProfileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

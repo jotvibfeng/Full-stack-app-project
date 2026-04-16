@@ -56,6 +56,13 @@ export default function Header() {
           >
             Contact
           </Link>
+          <Link
+            to="/atlasProfile"
+            className="nav-link"
+            activeProps={{ className: 'nav-link is-active' }}
+          >
+            Profile
+          </Link>
         </div>
       </nav>
     </header>
