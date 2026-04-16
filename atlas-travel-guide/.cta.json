@@ -1,0 +1,29 @@
+{
+  "projectName": "atlas-travel-guide",
+  "mode": "file-router",
+  "typescript": true,
+  "packageManager": "npm",
+  "includeExamples": false,
+  "tailwind": true,
+  "addOnOptions": {
+    "prisma": {
+      "database": "mysql"
+    }
+  },
+  "envVarValues": {},
+  "git": true,
+  "routerOnly": false,
+  "version": 1,
+  "framework": "react",
+  "chosenAddOns": [
+    "eslint",
+    "sentry",
+    "prisma",
+    "compiler",
+    "form",
+    "t3env",
+    "table",
+    "tanstack-query",
+    "shadcn"
+  ]
+}
